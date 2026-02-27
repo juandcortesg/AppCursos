@@ -1,0 +1,41 @@
+<div class="card shadow-sm border-0 rounded-3">
+    <div class="card-header bg-light border-bottom">
+        <h5 class="mb-0 text-dark fw-semibold">Cursos registrados</h5>
+    </div>
+    <div class="card-body p-4">
+        <div *ngIf="courses.length === 0" class="alert alert-info text-center py-5 mb-0 rounded-3">
+            <i class="bi bi-info-circle-fill me-2"></i>
+            No hay cursos registrados.
+        </div>
+
+        <div *ngFor="let course of courses" class="course-card mb-3 rounded-3">
+            <div class="d-flex justify-content-between align-items-center flex-wrap gap-3 px-3 py-3">
+                <div class="course-info">
+                    <h6 class="mb-1 text-dark fw-semibold">{{ course.nombre }}</h6>
+                    <div class="text-muted small d-flex align-items-center gap-3">
+                        <span>Duración: {{ course.duracion }} horas</span>
+                        <span class="bullet">•</span>
+                        <span>Nivel: {{ course.nivel }}</span>
+                    </div>
+                </div>
+
+                <div class="d-flex align-items-center gap-2 flex-wrap">
+                    <span class="status-badge"
+                        [ngClass]="course.estado ? 'active' : 'inactive'">
+                        {{ course.estado ? 'Activo' : 'Inactivo' }}
+                    </span>
+
+                    <button class="btn btn-sm btn-outline-warning"
+                            (click)="toggleState(course.id)">
+                        {{ course.estado ? 'Desactivar' : 'Activar' }}
+                    </button>
+
+                    <button class="btn btn-sm btn-outline-danger"
+                            (click)="deleteCourse(course.id)">
+                        Eliminar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

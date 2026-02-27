@@ -1,0 +1,40 @@
+<div class="card mb-4 shadow-sm border-0 rounded-3">
+    <div class="card-header bg-light border-bottom">
+        <h5 class="mb-0 text-dark fw-semibold">Registrar nuevo curso</h5>
+    </div>
+    <div class="card-body pb-4">
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+            <div class="mb-3">
+                <label class="form-label fw-bold text-muted small">Nombre del curso</label>
+                <input type="text" class="form-control" formControlName="nombre" placeholder="Ej: Desarrollo Web Avanzado">
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label fw-bold text-muted small">Duración (horas)</label>
+                <input type="number" class="form-control" formControlName="duracion" placeholder="Ej: 40">
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label fw-bold text-muted small">Nivel</label>
+                <select class="form-select" formControlName="nivel">
+                    <option value="" disabled selected>Seleccione nivel</option>
+                    <option value="Básico">Básico</option>
+                    <option value="Intermedio">Intermedio</option>
+                    <option value="Avanzado">Avanzado</option>
+                </select>
+            </div>
+
+            <div class="mb-4">
+                <label class="form-label fw-bold text-muted small">Estado inicial</label>
+                <select class="form-select" formControlName="estado">
+                    <option [ngValue]="true">Activo</option>
+                    <option [ngValue]="false">Inactivo</option>
+                </select>
+            </div>
+
+            <button type="submit" class="btn btn-primary w-100 py-2 fw-medium" [disabled]="form.invalid">
+                Agregar curso
+            </button>
+        </form>
+    </div>
+</div>
