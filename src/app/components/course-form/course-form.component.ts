@@ -27,6 +27,10 @@ export class CourseFormComponent {
             estado: this.estado
         });
 
+        form.resetForm();
+        form.form.markAsPristine();
+        form.form.markAsUntouched();
+
         this.nombre = '';
         this.duracion = null;
         this.nivel = '';
