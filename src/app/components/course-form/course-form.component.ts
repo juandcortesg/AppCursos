@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CoursesService } from '../../courses.service';
 
 @Component({
@@ -8,25 +7,29 @@ import { CoursesService } from '../../courses.service';
     styleUrls: ['./course-form.component.scss']
 })
 export class CourseFormComponent {
-    form: FormGroup;
 
-    constructor(
-        private fb: FormBuilder,
-        private coursesService: CoursesService
-    ) {
-        this.form = this.fb.group({
-            nombre: ['', [Validators.required, Validators.minLength(3)]],
-            duracion: [null, [Validators.required, Validators.min(1)]],
-            nivel: ['', Validators.required],
-            estado: [true, Validators.required]
-        });
-    }
+    nombre: string = '';
+    duracion: number | null = null;
+    nivel: string = '';
+    estado: boolean = true;
 
-    onSubmit(): void {
-        if (this.form.invalid) {
+    constructor(private coursesService: CoursesService) {}
+
+    onSubmit(form: any): void {
+        if (!form.valid) {
             return;
         }
-        this.coursesService.addCourse(this.form.value);
-        this.form.reset();
+
+        this.coursesService.addCourse({
+            nombre: this.nombre,
+            duracion: this.duracion!,
+            nivel: this.nivel,
+            estado: this.estado
+        });
+
+        this.nombre = '';
+        this.duracion = null;
+        this.nivel = '';
+        this.estado = true;
     }
 }
